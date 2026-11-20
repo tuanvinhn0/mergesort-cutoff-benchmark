@@ -68,24 +68,24 @@ mergesort-cutoff-benchmark/
 
 ### Step 1: Verify Correctness
 Run unit tests to ensure both `InsertionSort` and `Mergesort` pass all edge cases (empty array, single element, already sorted, reversed, duplicates, and large random arrays):
-```bash
+```cmd
 # In IntelliJ: Right-click MergesortTest.java -> Run
-# Or via CLI:
-javac -d out (Get-ChildItem -Recurse -Path "src/main/java/*.java").FullName
+# Or via Command Prompt (CMD) / PowerShell:
+javac -d out src\main\java\sort\*.java src\main\java\benchmark\*.java
 java -cp out sort.MergesortTest
 ```
 
 ### Step 2: Run Benchmark Experiment
 Executes the parameter sweep across array sizes $N \in [10^4, 10^6]$ and cutoff thresholds $C \in [0, 32]$ with automatic JVM warm-up:
-```bash
+```cmd
 java -cp out benchmark.BenchmarkRunner
 ```
 *Results are automatically saved to `results/benchmark_cutoff.csv`.*
 
 ### Step 3: Statistical Analysis & Visualization
 Parses the benchmark CSV, computes statistical metrics, and generates 300 DPI publication-quality figures:
-```bash
-python scripts/analyze_benchmark.py
+```cmd
+python scripts\analyze_benchmark.py
 ```
 
 ### Benchmark Methodology: Warm-up and Discard Strategy
