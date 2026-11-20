@@ -3,10 +3,7 @@ package sort;
 import java.util.Arrays;
 import java.util.Random;
 
-/**
- * Lớp kiểm thử tính đúng đắn của InsertionSort và Mergesort.
- * Bạn có thể chạy trực tiếp file này (Right click -> Run trong IntelliJ) để kiểm tra implementation của mình.
- */
+// Correctness tests for InsertionSort and Mergesort
 public class MergesortTest {
 
     public static void main(String[] args) {
@@ -18,9 +15,9 @@ public class MergesortTest {
         allPassed &= testLargeRandomArrays();
 
         if (allPassed) {
-            System.out.println("All passed");
+            System.out.println("\nAll tests passed.");
         } else {
-            System.err.println("Failed");
+            System.err.println("\nSome tests FAILED.");
         }
     }
 
@@ -29,12 +26,12 @@ public class MergesortTest {
         Integer[] arr = { 5, 2, 9, 1, 5, 6, 3, 8 };
         InsertionSort.sort(arr);
         boolean passed = Mergesort.isSorted(arr);
-        printResult("InsertionSort trên mảng nhỏ", passed);
+        printResult("Small array", passed);
         return passed;
     }
 
     private static boolean testMergesortWithVariousCutoffs() {
-        System.out.println("\nKiểm tra Mergesort với các giá trị CUTOFF khác nhau:");
+        System.out.println("\nMergesort with various CUTOFF values:");
         int[] cutoffs = { 0, 1, 7, 10, 16, 32 };
         boolean passed = true;
 
@@ -53,49 +50,49 @@ public class MergesortTest {
     }
 
     private static boolean testSpecialCases() {
-        System.out.println("\nKiểm tra các trường hợp đặc biệt:");
+        System.out.println("\nSpecial cases:");
         boolean passed = true;
 
-        // 1. Mảng rỗng
+        // Empty array
         Integer[] empty = {};
         Mergesort.sort(empty, 10);
         boolean okEmpty = (empty.length == 0);
-        printResult("Mảng rỗng", okEmpty);
+        printResult("Empty array", okEmpty);
         passed &= okEmpty;
 
-        // 2. Mảng 1 phần tử
+        // Single element
         Integer[] single = { 42 };
         Mergesort.sort(single, 10);
         boolean okSingle = (single.length == 1 && single[0] == 42);
-        printResult("Mảng 1 phần tử", okSingle);
+        printResult("Single element", okSingle);
         passed &= okSingle;
 
-        // 3. Mảng đã sắp xếp sẵn
+        // Already sorted
         Integer[] sorted = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
         Mergesort.sort(sorted, 10);
         boolean okSorted = Mergesort.isSorted(sorted);
-        printResult("Mảng đã sắp xếp sẵn", okSorted);
+        printResult("Already sorted", okSorted);
         passed &= okSorted;
 
-        // 4. Mảng đảo ngược hoàn toàn
+        // Reverse sorted
         Integer[] reversed = { 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 };
         Mergesort.sort(reversed, 10);
         boolean okReversed = Mergesort.isSorted(reversed);
-        printResult("Mảng ngược", okReversed);
+        printResult("Reverse sorted", okReversed);
         passed &= okReversed;
 
-        // 5. Mảng toàn phần tử giống nhau (all duplicates)
+        // All duplicates
         Integer[] duplicates = { 7, 7, 7, 7, 7, 7, 7, 7 };
         Mergesort.sort(duplicates, 10);
         boolean okDup = Mergesort.isSorted(duplicates);
-        printResult("Mảng nhiều phần tử trùng lặp", okDup);
+        printResult("All duplicates", okDup);
         passed &= okDup;
 
         return passed;
     }
 
     private static boolean testLargeRandomArrays() {
-        System.out.println("\nKiểm tra mảng ngẫu nhiên kích thước lớn (N = 10,000):");
+        System.out.println("\nLarge random array (N = 10,000):");
         Integer[] arr = generateRandomArray(10000, 12345);
         Integer[] expected = arr.clone();
         Arrays.sort(expected);
@@ -103,7 +100,7 @@ public class MergesortTest {
         Mergesort.sort(arr, 10);
 
         boolean passed = Arrays.equals(arr, expected);
-        printResult("Mảng N = 10,000 với CUTOFF = 10", passed);
+        printResult("N = 10,000 with CUTOFF = 10", passed);
         return passed;
     }
 
